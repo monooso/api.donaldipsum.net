@@ -12,4 +12,4 @@ RUN npm install
 EXPOSE 3000
 
 # Start the application
-CMD ["npm", "start"]
+CMD ["./node_modules/.bin/nodemon", "app.js"]
