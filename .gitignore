@@ -4,5 +4,6 @@
 # Editor
 .idea/
 
-# Node
+# Node / NPM
 node_modules/
+npm-debug.log

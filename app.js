@@ -10,13 +10,25 @@ generator = require('./lib/generator')(seedText);
 
 /**
  * Builds a "success" response object.
- * @param   {string} content
- * @returns {boolean}
+ * @param   {*} content
+ * @returns {object}
  */
 function buildSuccessfulResponse(content) {
     return {
         success: true,
         content: content,
+    };
+}
+
+/**
+ * Builds an "error" response object.
+ * @param   {*} error
+ * @returns {object}
+ */
+function buildErrorResponse(error) {
+    return {
+        success: false,
+        content: error,
     };
 }
 
@@ -60,6 +72,21 @@ app.get('/:version/words', function (req, res) {
     content = [generator.generateWords(count)];
 
     res.status(200).json(buildSuccessfulResponse(content));
+});
+
+/**
+ * Handles internal errors.
+ */
+app.use(function(err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).json(err.name + ' ' + err.message);
+});
+
+/**
+ * Handles 404 errors.
+ */
+app.use(function(req, res, next) {
+    res.status(404).json(buildErrorResponse('Unsupported endpoint'));
 });
 
 /**
