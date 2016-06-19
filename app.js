@@ -8,17 +8,6 @@ app = require('express')();
 seedText = require('./lib/transcriptLoader');
 generator = require('./lib/generator')(seedText);
 
-/*
-https://api.donaldipsum.net/v1.0.0/words?count=10
-https://api.donaldipsum.net/v1.0.0/sentences?count=3
-https://api.donaldipsum.net/v1.0.0/paragraphs?count=3
-
-{
-   "success": true,
-   "content": ["Trust me."]
-}
-*/
-
 /**
  * Builds a "success" response object.
  * @param   {string} content
@@ -76,6 +65,6 @@ app.get('/:version/words', function (req, res) {
 /**
  * Starts the server.
  */
-app.listen(8080, function () {
+app.listen(process.env.PORT, function () {
     console.log('Application started.');
 });
