@@ -13,7 +13,7 @@ generator = require('./lib/generator')(seedText);
  * @param   {*} content
  * @returns {object}
  */
-function buildSuccessfulResponse(content) {
+function buildSuccessResponse(content) {
     return {
         success: true,
         content: content,
@@ -43,7 +43,7 @@ app.get('/:version/paragraphs', function (req, res) {
     count = req.query.count || 3;
     content = generator.generateParagraphs(count);
 
-    res.status(200).json(buildSuccessfulResponse(content));
+    res.status(200).json(buildSuccessResponse(content));
 });
 
 /**
@@ -57,7 +57,7 @@ app.get('/:version/sentences', function (req, res) {
     count = req.query.count || 3;
     content = generator.generateSentences(count);
 
-    res.status(200).json(buildSuccessfulResponse(content));
+    res.status(200).json(buildSuccessResponse(content));
 });
 
 /**
@@ -71,7 +71,7 @@ app.get('/:version/words', function (req, res) {
     count = req.query.count || 10;
     content = [generator.generateWords(count)];
 
-    res.status(200).json(buildSuccessfulResponse(content));
+    res.status(200).json(buildSuccessResponse(content));
 });
 
 /**
