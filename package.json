@@ -1,0 +1,21 @@
+{
+  "name": "api.donaldipsum.net",
+  "version": "0.1.0",
+  "description": "API to retrieve all the best words",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "make test"
+  },
+  "keywords": [],
+  "author": "Stephen Lewis",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0",
+    "libmarkov": "^1.1.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
+}
