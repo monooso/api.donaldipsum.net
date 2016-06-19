@@ -25,6 +25,26 @@ describe('generator', function () {
         it('should generate a string containing a specific number of sentences', function () {
             expect(subject.generateSentences(5).length).to.equal(5);
         });
+
+        it('should ensure the sentence starts with an uppercase letter', function () {
+            let output;
+            let subject;
+
+            subject = generator('tab toe tip');
+            output = subject.generateSentences(1)[0];
+
+            expect(output[0]).to.equal('T');
+        });
+
+        it('should ensure the sentence ends with a period', function () {
+            let output;
+            let subject;
+
+            subject = generator('tab toe tip');
+            output = subject.generateSentences(1)[0];
+
+            expect(output[output.length - 1]).to.equal('.');
+        });
     });
 
     describe('generateWords', function () {
