@@ -75,6 +75,14 @@ app.get('/:version/words', function (req, res) {
 });
 
 /**
+ * Handles internal errors.
+ */
+app.use(function(err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).json(err.name + ' ' + err.message);
+});
+
+/**
  * Handles 404 errors.
  */
 app.use(function(req, res, next) {
