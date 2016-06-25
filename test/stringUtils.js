@@ -54,7 +54,8 @@ describe('string utils', function () {
 
     describe('limitWords', function () {
         it('should limit the number of words in a string', function () {
-            expect(subject.limitWords('One two three', 2)).to.equal('One two');
+            expect(subject.limitWords('You want tact, talk to a tactician', 5))
+                .to.equal('You want tact, talk to');
         });
 
         it('should return the full string if it contains fewer words than the limit', function () {
