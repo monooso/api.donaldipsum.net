@@ -78,25 +78,17 @@ app.get('/:version/words', function (req, res) {
 });
 
 /**
- * Handles internal errors.
- */
-app.use(function (err, req, res) {
-    var content;
-
-    content = [err.name + ' ' + err.message];
-
-    res.status(500).json(buildErrorResponse(content));
-});
-
-/**
  * Handles 404 errors.
  */
 app.use(function (req, res) {
-    var content;
+    res.status(404).json(buildErrorResponse('Unsupported endpoint'));
+});
 
-    content = ['Unsupported endpoint'];
-
-    res.status(404).json(buildErrorResponse(content));
+/**
+ * Handles internal errors.
+ */
+app.use(function (err, req, res) {
+    res.status(err.status || 500).json(buildErrorResponse(err.name + ' ' + err.message));
 });
 
 /**
