@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "dev": "PORT=3000 node app.js",
     "test": "make test"
   },
   "keywords": [],
