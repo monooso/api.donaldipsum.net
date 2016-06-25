@@ -9,6 +9,15 @@ seedText = require('./lib/transcriptLoader');
 generator = require('./lib/generator')(seedText);
 
 /**
+ * Ensures that the response "content" property is an array.
+ * @param   {*} content
+ * @returns {array}
+ */
+function normalizeResponseContent(content) {
+    return content instanceof Array ? content : [content];
+}
+
+/**
  * Builds a "success" response object.
  * @param   {*} content
  * @returns {object}
@@ -16,7 +25,7 @@ generator = require('./lib/generator')(seedText);
 function buildSuccessResponse(content) {
     return {
         success: true,
-        content: content,
+        content: normalizeResponseContent(content),
     };
 }
 
@@ -28,7 +37,7 @@ function buildSuccessResponse(content) {
 function buildErrorResponse(error) {
     return {
         success: false,
-        content: error,
+        content: normalizeResponseContent(error),
     };
 }
 
@@ -36,42 +45,36 @@ function buildErrorResponse(error) {
  * Generates an arbitrary number of paragraphs.
  */
 app.get('/:version/paragraphs', function (req, res) {
-    var content;
     var count;
 
     // Default to 3 paragraphs.
     count = req.query.count || 3;
-    content = generator.generateParagraphs(count);
 
-    res.status(200).json(buildSuccessResponse(content));
+    res.status(200).json(buildSuccessResponse(generator.generateParagraphs(count)));
 });
 
 /**
  * Generates an arbitrary number of sentences.
  */
 app.get('/:version/sentences', function (req, res) {
-    var content;
     var count;
 
     // Default to 3 sentences.
     count = req.query.count || 3;
-    content = generator.generateSentences(count);
 
-    res.status(200).json(buildSuccessResponse(content));
+    res.status(200).json(buildSuccessResponse(generator.generateSentences(count)));
 });
 
 /**
  * Generates an arbitrary number of words.
  */
 app.get('/:version/words', function (req, res) {
-    var content;
     var count;
 
     // Default to 10 words.
     count = req.query.count || 10;
-    content = [generator.generateWords(count)];
 
-    res.status(200).json(buildSuccessResponse(content));
+    res.status(200).json(buildSuccessResponse(generator.generateWords(count)));
 });
 
 /**
