@@ -1,28 +1,97 @@
 # DonaldIpsum API #
 The DonaldIpsum API generates all the best words for you to use. Trust me, these are great.
 
-## Endpoints ##
-The API exposes three endpoints, relative to the base `/v1.0.0/` URL. Each endpoint accepts an optional `count` query string parameter.
+## Overview ##
+The API is accessed over HTTPS, at `https://api.donaldipsum.net/{version}/`.
 
-| Verb | Endpoint      |
-|:----:|:-------------:|
-| GET  | `paragraphs` |
-| GET  | `sentences`  |
-| GET  | `words`      |
+The current version of the API is `v1`, meaning that the full API "base" URL is `https://api.donaldipsum.net/v1/`. All of the endpoints described in this document are relative to this base URL.
 
-## Response ##
-The JSON response is an object of the form:
+All data is sent and received as JSON.
+
+## `GET paragraphs` ##
+The `GET paragraphs` endpoint returns zero or more paragraphs of Donald Ipsum content.
+
+| Parameter | Type    | Location     | Default value |
+|:---------:|:-------:|:------------:|:-------------:|
+| `count`   | Integer | Query string | `3`           |
+
+### Example request ###
+
+```bash
+curl https://api.donaldipsum.net/v1/paragraphs?count=2
+```
+
+### Example response ###
 
 ```json
 {
   "success": true,
-  "content": [ "Response content" ]
+  "content": [
+    "First paragraph",
+    "Second paragraph"
+  ]
 }
 ```
 
-Some things worth noting:
+## `GET sentences` ##
+The `GET sentences` endpoint returns zero or more sentences of Donald Ipsum content.
 
-- In the event of a successful call to the `paragraphs` endpoint, `content` will contain an array of paragraphs.
-- In the event of a successful call to the `sentences` endpoint, `content` will contain an array of sentences.
-- In the event of a successful call to the `words` endpoint, `content` is an array containing a single string.
-- In the event of an error, `success` is `false`, and `content` is an array of error strings.
+| Parameter | Type    | Location     | Default value |
+|:---------:|:-------:|:------------:|:-------------:|
+| `count`   | Integer | Query string | `3`           |
+
+### Example request ###
+
+```bash
+curl https://api.donaldipsum.net/v1/sentences?count=2
+```
+
+### Example response ###
+
+```json
+{
+  "success": true,
+  "content": [
+    "Let's make America great again!",
+    "I am officially running for president of Afghanistan."
+  ]
+}
+```
+
+## `GET words` ##
+The `GET words` endpoint returns zero or more words of Donald Ipsum content.
+
+| Parameter | Type    | Location     | Default value |
+|:---------:|:-------:|:------------:|:-------------:|
+| `count`   | Integer | Query string | `10`          |
+
+### Example request ###
+
+```bash
+curl https://api.donaldipsum.net/v1/words?count=5
+```
+
+### Example response ###
+
+```json
+{
+  "success": true,
+  "content": [
+    "Look at my tiny hands"
+  ]
+}
+```
+
+## Error responses ##
+All error responses return the appropriate HTTP status code, and the following JSON structure:
+
+```json
+{
+  "success": false,
+  "content": [
+    "First error message",
+    "Second error message",
+    "And so forth"
+  ]
+}
+```
