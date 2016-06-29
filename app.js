@@ -2,6 +2,7 @@
 
 var app;
 var generator;
+var port;
 var seedText;
 
 app = require('express')();
@@ -94,6 +95,8 @@ app.use(function (err, req, res) {
 /**
  * Starts the server.
  */
-app.listen(process.env.PORT, function () {
-    console.log('Application started.');
+port = process.env.PORT || 3000;
+
+app.listen(port, function () {
+    console.log('Application started on port', port);
 });
