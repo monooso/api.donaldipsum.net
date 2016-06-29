@@ -44,7 +44,7 @@ function buildErrorResponse(error) {
 /**
  * Generates an arbitrary number of paragraphs.
  */
-app.get('/:version/paragraphs', function (req, res) {
+app.get('/v1/paragraphs', function (req, res) {
     var count;
 
     // Default to 3 paragraphs.
@@ -56,7 +56,7 @@ app.get('/:version/paragraphs', function (req, res) {
 /**
  * Generates an arbitrary number of sentences.
  */
-app.get('/:version/sentences', function (req, res) {
+app.get('/v1/sentences', function (req, res) {
     var count;
 
     // Default to 3 sentences.
@@ -68,7 +68,7 @@ app.get('/:version/sentences', function (req, res) {
 /**
  * Generates an arbitrary number of words.
  */
-app.get('/:version/words', function (req, res) {
+app.get('/v1/words', function (req, res) {
     var count;
 
     // Default to 10 words.
